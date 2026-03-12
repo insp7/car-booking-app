@@ -1,0 +1,736 @@
+/* ═══════════════════════════════════════════════════════════
+   WEDRITI — Commute Booking Page
+   Exact dimensions sourced from Figma spec
+   Font: Lora  |  Primary: #4B131F  |  Accent: #750D2B
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── CSS Variables ── */
+:root {
+  --clr-primary:   #4B131F;
+  --clr-accent:    #750D2B;
+  --clr-cream:     #E7E0D0;
+  --clr-grey-card: #EFEFEF;
+  --clr-grey-incl: #F7F7F7;
+  --clr-divider:   #818181;
+  --clr-white:     #FFFFFF;
+  --clr-text:      #000000;
+  --clr-text-muted:#4D4D4D;
+  --font:          'Lora', Georgia, serif;
+
+  /* Typography scale (from Figma) */
+  --fs-h2:  28px;  /* H2 */
+  --fs-b1:  18px;  /* B1 – semibold */
+  --fs-b2:  16px;  /* B2 – normal */
+  --fs-b3:  14px;  /* B3 – metadata */
+}
+
+/* ── Reset / Base ── */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  background: var(--clr-white);
+  color: var(--clr-text);
+  min-width: 1440px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   NAVBAR
+   height: 56px  |  bg: rgba(216,217,214,0.8)
+   ═══════════════════════════════════════════════════════════ */
+.wb-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 56px;
+  background: rgba(216, 217, 214, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+}
+
+.wb-navbar__inner {
+  display: flex;
+  margin-right: 275px;
+  align-items: center;
+  height: 100%;
+  padding: 0 60px;
+  gap: 0;
+}
+
+/* Logo */
+.wb-logo {
+  display: flex;
+  align-items: baseline;
+  margin-right: auto;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--clr-primary);
+  letter-spacing: 0.05em;
+}
+.wb-logo__w  { color: var(--clr-accent); }
+.wb-logo__rest { color: var(--clr-primary); }
+
+/* Nav Links */
+.wb-nav {
+  display: flex;
+  align-items: center;
+  gap: 46px;
+  /* Figma: left:359 from start, width:734 */
+  margin-left: auto;
+}
+
+.wb-nav__link {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--clr-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s;
+}
+.wb-nav__link:hover    { color: var(--clr-accent); }
+.wb-nav__link--active  { color: #BC0C60; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN CANVAS
+   width:1440 | height:1823 (approx) | bg: #FFF
+   ═══════════════════════════════════════════════════════════ */
+.wb-canvas {
+  position: relative;
+  width: 1440px;
+  min-height: 1125px;   /* footer starts at 1125 */
+  margin: 0 auto;
+  background: var(--clr-white);
+  padding-top: 56px;    /* navbar offset */
+}
+
+/* ── Shared card base ── */
+.wb-card {
+  position: absolute;
+  border-radius: 10px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   ROUTE CARD
+   width:317 | height:216 | left:60 | top:186
+   bg: #EFEFEF
+   ═══════════════════════════════════════════════════════════ */
+.wb-card--route {
+  width:  317px;
+  height: 216px;
+  left:    60px;
+  top:    186px;
+  background: var(--clr-grey-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.wb-route__label {
+  /* H2 */
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 36px;
+  color: var(--clr-text);
+}
+
+.wb-route__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 2px;
+  position: relative;
+  margin: 4px 0;
+}
+.wb-route__arrow::before {
+  content: '';
+  display: block;
+  width: 45px;
+  height: 2px;
+  background: var(--clr-text);
+}
+.wb-route__arrow::after {
+  content: '▶';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: var(--clr-text);
+}
+
+.wb-route__date,
+.wb-route__time {
+  /* B1 semibold */
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  color: var(--clr-text);
+  width: 225px;
+  text-align: left;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   CAR CARD
+   width:484 | height:216 | left:394 | top:186
+   bg: #EFEFEF
+   ═══════════════════════════════════════════════════════════ */
+.wb-card--car {
+  width:  484px;
+  height: 216px;
+  left:   394px;
+  top:    186px;
+  background: var(--clr-grey-card);
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 24px;
+}
+
+.wb-car__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.wb-car__name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wb-car__name {
+  /* H2 */
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.wb-car__badge {
+  background: #D9D9D9;
+  border-radius: 2px;
+  padding: 2px 5px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--clr-text);
+}
+
+.wb-car__ratings {
+  font-size: var(--fs-b2);
+  line-height: 100%;
+  color: rgba(0,0,0,0.8);
+}
+
+.wb-car__stars {
+  display: flex;
+  gap: 1px;
+  font-size: 16px;
+}
+.wb-star--full  { color: var(--clr-accent); }
+.wb-star--empty { color: transparent; -webkit-text-stroke: 1px var(--clr-accent); }
+
+.wb-car__specs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-b2);
+  line-height: 20px;
+  color: var(--clr-text);
+}
+.wb-car__spec-sep {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: rgba(0,0,0,0.8);
+  transform: rotate(0deg);
+}
+
+.wb-car__image-wrap {
+  width:  257px;
+  height: 183px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.wb-car__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   COUPONS CARD
+   width:484 | height:536 | left:896 | top:186
+   border: 2px solid #4B131F
+   ═══════════════════════════════════════════════════════════ */
+.wb-card--coupons {
+  width:  484px;
+  height: 536px;
+  left:   896px;
+  top:    186px;
+  border: 2px solid var(--clr-primary);
+  background: var(--clr-white);
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.wb-coupons__title {
+  /* B1 semibold  — Figma: left:921 top:201 */
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  color: var(--clr-text);
+  margin-bottom: 20px;
+}
+
+/* Coupon item row */
+.wb-coupon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+   margin-bottom: 10px;
+}
+
+.wb-coupon-item__radio {
+  appearance: none;
+  width:  21px;
+  height: 21px;
+  border: 1px solid var(--clr-primary);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.wb-coupon-item__radio:checked {
+  background: var(--clr-primary);
+  box-shadow: inset 0 0 0 4px var(--clr-white);
+}
+
+.wb-coupon-item__label {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.wb-coupon-item__code-wrap {
+  /* dashed box: width:141 height:31 border:1px dashed #4B131F radius:5 */
+  display: inline-block;
+  width:  141px;
+  height:  31px;
+  border: 1px dashed var(--clr-primary);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.wb-coupon-item__code {
+  /* B2 */
+  font-size: var(--fs-b2);
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--clr-text);
+}
+
+.wb-coupon-item__desc {
+  /* B3 */
+  font-size: var(--fs-b3);
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--clr-text);
+  max-width: 346px;
+}
+
+.wb-coupons__divider {
+  border: none;
+  border-top: 1.5px solid var(--clr-primary);
+  margin: 0;
+   margin-bottom: 10px;
+  opacity: 1;
+}
+
+/* Coupon input row — Figma: Rectangle 19352 (400×64) */
+.wb-coupons__input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width:  430px;
+  height:  64px;
+  background: rgba(217,217,217,0.2);
+  box-shadow: inset 0px 1.67px 3.27px rgba(0,0,0,0.25);
+  border-radius: 10px;
+  padding: 0 16px;
+  margin-top: 30px;
+}
+
+.wb-coupons__input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font);
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  color: var(--clr-text);
+  width: 225px;
+}
+.wb-coupons__input::placeholder { color: rgba(0,0,0,0.45); }
+
+.wb-coupons__apply {
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  color: var(--clr-accent);
+  cursor: pointer;
+  padding: 0;
+  transition: opacity .2s;
+}
+.wb-coupons__apply:hover { opacity: 0.7; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   INCLUSIONS CARD
+   width:818 | height:590 | left:60 | top:421
+   bg: #F7F7F7
+   ═══════════════════════════════════════════════════════════ */
+.wb-card--inclusions {
+  width:  818px;
+  height: 590px;
+  left:    60px;
+  top:    421px;
+  background: var(--clr-grey-incl);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wb-incl__title {
+  /* B1 semibold  — Figma: left:82 top:446 */
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  color: var(--clr-text);
+  margin-bottom: 25px;
+}
+
+.wb-incl__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 12px 0;
+}
+
+.wb-incl__icon {
+  width:  36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.wb-incl__icon i {
+  font-size: 28px;
+  color: var(--clr-accent);
+}
+
+.wb-incl__label {
+  /* B2 */
+  font-size: var(--fs-b2);
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--clr-text);
+  width: 211px;
+}
+
+.wb-incl__sub {
+  /* B3 */
+  font-size: var(--fs-b3);
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--clr-text-muted);
+  max-width: 402px;
+  margin-top: 8px;
+}
+
+.wb-incl__divider {
+  border: none;
+  border-top: 1.5px solid var(--clr-divider);
+  margin: 5px;
+  opacity: 1;
+}
+
+.wb-incl__policies {
+  /* Figma: top:955 color:#750D2B B1 semibold */
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  color: var(--clr-accent);
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.wb-incl__policies i { font-size: 18px; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   PAYMENT DETAILS CARD
+   width:484 | height:270 | left:896 | top:741
+   border: 2px solid #4B131F
+   ═══════════════════════════════════════════════════════════ */
+.wb-card--payment {
+  width:  484px;
+  height: 270px;
+  left:   896px;
+  top:    741px;
+  border: 2px solid var(--clr-primary);
+  border-radius: 10px;
+  background: var(--clr-white);
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.wb-pay__title {
+  /* B1 semibold */
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  color: var(--clr-text);
+  margin-bottom: 14px;
+}
+
+.wb-pay__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.wb-pay__radio {
+  appearance: none;
+  width:  21px;
+  height: 21px;
+  border: 1px solid var(--clr-primary);
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background .2s;
+}
+.wb-pay__radio:checked {
+  background: var(--clr-primary);
+  box-shadow: inset 0 0 0 4px var(--clr-white);
+}
+
+.wb-pay__label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  cursor: pointer;
+}
+
+.wb-pay__mode {
+  /* B2 */
+  font-size: var(--fs-b2);
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--clr-text);
+  width: 127px;
+}
+
+.wb-pay__sub {
+  /* B3 */
+  font-size: var(--fs-b3);
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--clr-text);
+}
+
+.wb-pay__amount {
+  /* B2 right-aligned */
+  font-size: var(--fs-b2);
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--clr-text);
+  text-align: right;
+  width: 127px;
+}
+
+/* PAY NOW Button — Figma: 400×48 bg:#750D2B radius:10 */
+.wb-pay__now-btn {
+  width:  400px;
+  height:  48px;
+  background: var(--clr-accent);
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: var(--fs-b1);
+  font-weight: 600;
+  line-height: 23px;
+  text-align: center;
+  color: var(--clr-white);
+  cursor: pointer;
+  margin-top: auto;
+  transition: background .25s, transform .15s;
+  /* Figma position relative to card: left:938-896=42, top:935-741=194 */
+  align-self: center;
+}
+.wb-pay__now-btn:hover {
+  background: var(--clr-primary);
+  transform: translateY(-1px);
+}
+.wb-pay__now-btn:active { transform: translateY(0); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+   width:1440 | height:651 | top:1125 | bg:#4B131F
+   ═══════════════════════════════════════════════════════════ */
+.wb-footer {
+  max-width:  1440px;
+  min-height: 651px;
+  background: var(--clr-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 156px 40px;
+  gap: 0;
+  position: relative;
+}
+
+.wb-footer__inner {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 32px;
+}
+
+/* Footer Logo */
+.wb-footer__logo {
+  font-family: var(--font);
+  margin-right: 20px;
+}
+.wb-footer__logo-w { color: #E7E0D0; }
+
+/* Footer Columns */
+.wb-footer__cols {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+}
+
+.wb-footer__col {
+  width: 219px;
+  flex-shrink: 0;
+}
+
+.wb-footer__col-title {
+  font-family: var(--font);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--clr-cream);
+  margin-bottom: 20px;
+}
+
+.wb-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wb-footer__list li {
+  font-size: var(--fs-b3);
+  font-weight: 400;
+  line-height: 18px;
+  color: #FFFFFF;
+}
+
+.wb-footer__get-in-touch {
+  font-family: var(--font);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--clr-cream);
+  text-decoration: none;
+  margin-top: 32px;
+  display: block;
+}
+.wb-footer__get-in-touch:hover { color: #fff; }
+
+/* Social Icons */
+.wb-footer__social {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 64px;
+  width: 498px;
+  height: 50px;
+  margin-top: 60px;
+}
+
+.wb-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: var(--clr-cream);
+  text-decoration: none;
+  transition: transform .2s, color .2s;
+}
+.wb-social-icon i {
+  font-size: 36px;
+  color: var(--clr-cream);
+}
+.wb-social-icon:hover { transform: scale(1.15); }
+.wb-social-icon:hover i { color: #fff; }
+
+/* Copyright */
+.wb-footer__copyright {
+  font-family: var(--font);
+  font-size: var(--fs-b2);
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  color: var(--clr-cream);
+  margin-top: 40px;
+  max-width: 1440px;
+}
+
