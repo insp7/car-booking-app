@@ -5,8 +5,6 @@ A Laravel-based web application for booking cars.
 This guide explains how to **set up and run the project locally after
 cloning the repository.**
 
-------------------------------------------------------------------------
-
 # 🚀 First-Time Setup (Quick Version)
 
 If you just cloned the repo, run:
@@ -21,8 +19,6 @@ php artisan migrate
 php artisan db:seed
 php artisan serve
 ```
-
-------------------------------------------------------------------------
 
 # 📦 Requirements
 
@@ -43,13 +39,9 @@ node -v
 npm -v
 ```
 
-------------------------------------------------------------------------
-
 # ⚙️ Project Setup in Detail
 
 Follow these steps **in order**.
-
-------------------------------------------------------------------------
 
 # 1. Clone the Repository
 
@@ -57,8 +49,6 @@ Follow these steps **in order**.
 git clone https://github.com/insp7/car-booking-app.git
 cd car-booking-app
 ```
-
-------------------------------------------------------------------------
 
 # 2. Install PHP Dependencies
 
@@ -68,8 +58,6 @@ Laravel backend dependencies are installed with Composer.
 composer install
 ```
 
-------------------------------------------------------------------------
-
 # 3. Create the Environment File
 
 Laravel requires an environment configuration file.
@@ -78,8 +66,6 @@ Laravel requires an environment configuration file.
 cp .env.example .env
 ```
 
-------------------------------------------------------------------------
-
 # 4. Generate Application Key
 
 Laravel requires an application encryption key.
@@ -87,8 +73,6 @@ Laravel requires an application encryption key.
 ``` bash
 php artisan key:generate
 ```
-
-------------------------------------------------------------------------
 
 # 5. Configure the Database
 
@@ -105,8 +89,6 @@ Create the SQLite database file:
 touch database/database.sqlite
 ```
 
-------------------------------------------------------------------------
-
 # 6. Install Frontend Dependencies
 
 Laravel uses **Vite** to compile frontend assets.
@@ -114,8 +96,6 @@ Laravel uses **Vite** to compile frontend assets.
 ``` bash
 npm install
 ```
-
-------------------------------------------------------------------------
 
 # 7. Build Frontend Assets
 
@@ -135,8 +115,6 @@ If you skip this step, you may see:
 
     Vite manifest not found at public/build/manifest.json
 
-------------------------------------------------------------------------
-
 # 8. Run Database Migrations
 
 Create the database tables.
@@ -144,8 +122,6 @@ Create the database tables.
 ``` bash
 php artisan migrate
 ```
-
-------------------------------------------------------------------------
 
 # 9. Seed the Database (Optional)
 
@@ -169,8 +145,6 @@ Example:
 php artisan db:seed --class=UserSeeder
 ```
 
-------------------------------------------------------------------------
-
 # 10. Reset Database and Seed (Optional)
 
 To reset the database completely:
@@ -181,8 +155,6 @@ php artisan migrate:fresh --seed
 
 This will: - Drop all tables - Recreate them - Run seeders
 
-------------------------------------------------------------------------
-
 # 11. Clear Laravel Cache (Recommended)
 
 ``` bash
@@ -190,8 +162,6 @@ php artisan optimize:clear
 ```
 
 This clears cached: - configuration - routes - views - application cache
-
-------------------------------------------------------------------------
 
 # 12. Run the Application
 
@@ -205,8 +175,6 @@ The app will be available at:
 
     http://127.0.0.1:8000
 
-------------------------------------------------------------------------
-
 # 13. Run Vite Dev Server (Optional for Development)
 
 For live frontend updates:
@@ -216,8 +184,6 @@ npm run dev
 ```
 
 Run this **in a separate terminal** while Laravel is running.
-
-------------------------------------------------------------------------
 
 # 🛠 Troubleshooting
 
@@ -232,8 +198,6 @@ npm install
 npm run build
 ```
 
-------------------------------------------------------------------------
-
 ## Database Errors
 
 Make sure migrations have run:
@@ -242,15 +206,11 @@ Make sure migrations have run:
 php artisan migrate
 ```
 
-------------------------------------------------------------------------
-
 ## Clear Laravel Cache
 
 ``` bash
 php artisan optimize:clear
 ```
-
-------------------------------------------------------------------------
 
 # 📄 License
 
