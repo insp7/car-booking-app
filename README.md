@@ -211,7 +211,3 @@ php artisan migrate
 ``` bash
 php artisan optimize:clear
 ```
-
-# 📄 License
-
-MIT License
